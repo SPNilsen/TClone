@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="StartupLogoWidth">175dp</dimen>
+    <dimen name="StartupLogoHeight">150dp</dimen>
+    <dimen name="StartupLayoutMargin">100dp</dimen>
+    <dimen name="StandardButtonWidth">300dp</dimen>
+    <dimen name="StandardButtonHeight">50dp</dimen>
+    <dimen name="StandardButtonTextSize">20sp</dimen>
+    <dimen name="StandardButtonMargin">5dp</dimen>
+    <dimen name="StandardButtonRadius">50dp</dimen>
+</resources>
