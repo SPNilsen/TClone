@@ -39,6 +39,6 @@
     </style>
 
     <style name="AltButtonGrey" parent="StandardButton">
-        <item name="android:background">@color/grey</item>
+        <item name="android:background">@drawable/standard_button_altgrey</item>
     </style>
 </resources>

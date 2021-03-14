@@ -23,4 +23,12 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
     </style>
+
+    <style name="AltButton" parent="StandardButton">
+        <item name="android:background">@drawable/standard_button_altcolor</item>
+    </style>
+
+    <style name="AltButtonGrey" parent="StandardButton">
+        <item name="android:background">@drawable/standard_button_altgrey</item>
+    </style>
 </resources>
