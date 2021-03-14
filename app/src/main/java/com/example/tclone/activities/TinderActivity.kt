@@ -7,64 +7,111 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.tclone.R
+import com.example.tclone.fragments.MatchesFragment
+import com.example.tclone.fragments.ProfileFragment
+import com.example.tclone.fragments.SwipeFragment
+import com.example.tclone.util.DATA_USERS
+import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class TinderActivity : AppCompatActivity() {
+class TinderActivity : AppCompatActivity(),TinderCallback {
 
-    private var al = ArrayList<String>()
-    private var arrayAdapter: ArrayAdapter<String>? = null
-    private var i = 0
+    private val firebaseAuth = FirebaseAuth.getInstance()
+    private val userId = firebaseAuth.currentUser?.uid
+    private lateinit var userDatabase: DatabaseReference
+
+    private var profileFragment: ProfileFragment? = null
+    private var swipeFragment: SwipeFragment? = null
+    private var matchesFragment: MatchesFragment? = null
+
+    private var profileTab : TabLayout.Tab? = null
+    private var swipeTab : TabLayout.Tab? = null
+    private var matchesTab : TabLayout.Tab? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        al.add("php")
-        al.add("c")
-        al.add("python")
-        al.add("java")
+        if(userId.isNullOrEmpty()){
+            onSignout()
+        }
 
-        //choose your favorite adapter
-        arrayAdapter = ArrayAdapter<String>(this,
-            R.layout.item,
-            R.id.helloText, al)
+        userDatabase = FirebaseDatabase.getInstance().reference.child(DATA_USERS) //references constants.kt as pointer to schema
 
-        frame.adapter = arrayAdapter
-        frame.setFlingListener(object : SwipeFlingAdapterView.onFlingListener {
-            override fun removeFirstObjectInAdapter() {
-                // this is the simplest way to delete an object from the Adapter (/AdapterView)
-                Log.d("LIST", "removed object!")
-                al.removeAt(0)
-                arrayAdapter?.notifyDataSetChanged()
+        profileTab = navigationTabs.newTab()
+        swipeTab = navigationTabs.newTab()
+        matchesTab = navigationTabs.newTab()
+
+        profileTab?.icon = ContextCompat.getDrawable(this, R.drawable.tab_profile)
+        swipeTab?.icon = ContextCompat.getDrawable(this, R.drawable.tab_swipe)
+        matchesTab?.icon = ContextCompat.getDrawable(this, R.drawable.tab_matches)
+
+        navigationTabs.addTab(profileTab!!)
+        navigationTabs.addTab(swipeTab!!)
+        navigationTabs.addTab(matchesTab!!)
+
+        navigationTabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                onTabSelected(tab)
             }
 
-            override fun onLeftCardExit(dataObject: Any) {
-                //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
-                Toast.makeText(this@TinderActivity, "Left!", Toast.LENGTH_SHORT).show()
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                onTabSelected(tab)
             }
 
-            override fun onRightCardExit(dataObject: Any) {
-                Toast.makeText(this@TinderActivity, "Right!", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onAdapterAboutToEmpty(itemsInAdapter: Int) {
-                // Ask for more data here
-                al.add("XML " + java.lang.String.valueOf(i))
-                arrayAdapter?.notifyDataSetChanged()
-                Log.d("LIST", "notified")
-                i++
-            }
-
-            override fun onScroll(p0: Float) {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab){
+                    profileTab ->{
+                        if(profileFragment == null){
+                            profileFragment = ProfileFragment()
+                            profileFragment!!.setCallback(this@TinderActivity)
+                        }
+                        replaceFragment(profileFragment!!)
+                    }
+                    swipeTab ->{
+                        if(swipeFragment == null){
+                            swipeFragment = SwipeFragment()
+                            swipeFragment!!.setCallback(this@TinderActivity)
+                        }
+                        replaceFragment(swipeFragment!!)
+                    }
+                    matchesTab->{
+                        if(matchesFragment == null){
+                            matchesFragment = MatchesFragment()
+                            matchesFragment!!.setCallback(this@TinderActivity)
+                        }
+                        replaceFragment(matchesFragment!!)
+                    }
+                }
             }
         })
 
+        profileTab?.select()
     }
+
+    fun replaceFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
+
+    override fun onSignout() {
+        firebaseAuth.signOut()
+        startActivity(StartupActivity.newIntent(this))
+        finish()
+    }
+
+    override fun onGetUserId(): String = userId!!
+
+    override fun onGetUserDatabase(): DatabaseReference = userDatabase
 
     companion object{
         fun newIntent(context: Context?) = Intent(context, TinderActivity::class.java)

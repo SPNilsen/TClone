@@ -15,4 +15,5 @@
     <color name="pink_main">#F2488F</color>
     <color name="pink_dark">#F2297D</color>
     <color name="blue_accent">#0B1C8E</color>
+    <color name="shadow">#cadddddd</color>
 </resources>

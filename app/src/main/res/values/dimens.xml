@@ -8,4 +8,5 @@
     <dimen name="StandardButtonTextSize">20sp</dimen>
     <dimen name="StandardButtonMargin">5dp</dimen>
     <dimen name="StandardButtonRadius">50dp</dimen>
+    <dimen name="navigation_height">50dp</dimen>
 </resources>
