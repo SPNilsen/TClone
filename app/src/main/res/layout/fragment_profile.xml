@@ -1,25 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--offset the topMargin of fragments to account for Navigation height-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/navigation_height"
     tools:context=".fragments.ProfileFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:id="@+id/profileLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            >
+            <ImageView
+                android:id="@+id/photoIV"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="@dimen/standard_width"
+                android:paddingBottom="@dimen/formBottomPadding"
+                android:src="@drawable/default_pic"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameTIL"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/photoIV"
+                android:paddingBottom="@dimen/formBottomPadding"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_name"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTIL"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameTIL"
+                android:paddingBottom="@dimen/formBottomPadding"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_email"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ageTIL"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/emailTIL"
+                android:paddingBottom="@dimen/formBottomPadding"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ageET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_age"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/radio1Layout"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ageTIL"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/genderTV"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/standard_height"
+                    android:layout_weight="1"
+                    android:paddingBottom="@dimen/formBottomPadding"
+                    android:text="@string/hint_gender"
+                    />
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/standard_height"
+                    android:layout_weight="2"
+                    android:paddingBottom="@dimen/formBottomPadding"
+                    android:gravity="right" android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/radioMan1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_man"
+                        />
+                    <RadioButton
+                        android:id="@+id/radioWoman1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_woman"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/radio2Layout"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radio1Layout"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/preferredGenderTV"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/standard_height"
+                    android:layout_weight="1"
+                    android:paddingBottom="@dimen/formBottomPadding"
+                    android:text="@string/hint_preferred_gender"
+                    />
+                <RadioGroup
+                    android:id="@+id/radioGroup2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/standard_height"
+                    android:layout_weight="2"
+                    android:paddingBottom="@dimen/formBottomPadding"
+                    android:gravity="right" android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/radioMan2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_man"
+                        />
+                    <RadioButton
+                        android:id="@+id/radioWoman2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_woman"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/applyButton"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="@dimen/standard_height"
+                android:layout_below="@id/radio2Layout"
+                style="@style/StandardButton"
+                android:text="@string/text_apply"/>
+
+            <Button
+                android:id="@+id/signoutButton"
+                android:layout_width="@dimen/standard_width"
+                android:layout_height="@dimen/standard_height"
+                android:layout_below="@id/applyButton"
+                style="@style/AltButtonGrey"
+                android:text="@string/text_signout"/>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
     <LinearLayout
         android:id="@+id/progressLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:background="#aaaaaaaa"
-        >
+        android:visibility="gone">
 
         <ProgressBar
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

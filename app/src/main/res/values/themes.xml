@@ -32,6 +32,13 @@
         <item name="android:layout_margin">@dimen/StandardButtonMargin</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
+    </style>
 
+    <style name="AltButton" parent="StandardButton">
+        <item name="android:background">@drawable/standard_button_altcolor</item>
+    </style>
+
+    <style name="AltButtonGrey" parent="StandardButton">
+        <item name="android:background">@color/grey</item>
     </style>
 </resources>
