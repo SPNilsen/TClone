@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.tclone.R
 import com.example.tclone.activities.TinderCallback
 import com.example.tclone.util.*
@@ -47,6 +49,8 @@ class ProfileFragment : Fragment() {
 
         populateInfo()
 
+        photoIV.setOnClickListener{ callback?.startActivityForPhoto()}
+
         applyButton.setOnClickListener { onApply() }
         signoutButton.setOnClickListener { callback?.onSignout() }
     }
@@ -84,6 +88,10 @@ class ProfileFragment : Fragment() {
                         radioWoman2.isChecked = true
                     }
                     //hide progress bar
+
+                    if(!user?.imageUrl.isNullOrEmpty()){
+                        populateImage(user?.imageUrl!!)
+                    }
                     progressLayout.visibility = View.GONE
                 }
             }
@@ -120,5 +128,17 @@ class ProfileFragment : Fragment() {
 
     }
 
+    fun updateImageUri(uri: String){
+        userDatabase.child(DATA_IMAGE_URL).setValue(uri)
+        populateImage(uri)
+    }
+
+    fun populateImage(uri: String){
+        Glide.with(this)
+            .load(uri)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(photoIV)
+    }
 
 }
