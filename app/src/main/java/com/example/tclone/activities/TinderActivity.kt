@@ -113,6 +113,10 @@ class TinderActivity : AppCompatActivity(),TinderCallback {
 
     override fun onGetUserDatabase(): DatabaseReference = userDatabase
 
+    override fun profileComplete() {
+        swipeTab?.select()
+    }
+
     companion object{
         fun newIntent(context: Context?) = Intent(context, TinderActivity::class.java)
     }

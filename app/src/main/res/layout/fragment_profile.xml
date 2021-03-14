@@ -168,7 +168,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:background="#aaaaaaaa"
-        android:visibility="gone">
+        >
 
         <ProgressBar
             android:layout_width="wrap_content"
