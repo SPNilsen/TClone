@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="StartupLogoWidth">175dp</dimen>
+    <dimen name="StartupLogoHeight">150dp</dimen>
+    <dimen name="StartupLayoutMargin">100dp</dimen>
+    <dimen name="StandardButtonWidth">300dp</dimen>
+    <dimen name="StandardButtonHeight">50dp</dimen>
+    <dimen name="StandardButtonTextSize">20sp</dimen>
+    <dimen name="StandardButtonMargin">5dp</dimen>
+    <dimen name="StandardButtonRadius">50dp</dimen>
     <dimen name="navigation_height">50dp</dimen>
+    <dimen name="standard_width">300dp</dimen>
+    <dimen name="standard_height">50dp</dimen>
+    <dimen name="formBottomPadding">16dp</dimen>
+    <dimen name="like_dislike_height">100dp</dimen>
+    <dimen name="likeDislikeButtonHeight">75dp</dimen>
 </resources>
