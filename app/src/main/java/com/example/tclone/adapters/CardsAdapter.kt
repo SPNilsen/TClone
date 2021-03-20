@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.tclone.R
+import com.example.tclone.activities.UserInfoActivity
 import com.example.tclone.util.User
 
 class CardsAdapter(context: Context, resourceId: Int, users:  List<User>) :ArrayAdapter<User>(context, resourceId, users){
@@ -18,10 +20,17 @@ class CardsAdapter(context: Context, resourceId: Int, users:  List<User>) :Array
 
         var name = finalView.findViewById<TextView>(R.id.nameTV)
         var image = finalView.findViewById<ImageView>(R.id.photoIV)
+
+        var userInfo = finalView.findViewById<LinearLayout>(R.id.userInfoLayout)
+
         name.text = "${user?.name}, ${user?.age}"
         Glide.with(context)
             .load(user?.imageUrl)
             .into(image)
+
+        userInfo.setOnClickListener {
+            finalView.context.startActivity(UserInfoActivity.newIntent(context, user?.uid))
+        }
 
         return finalView
     }

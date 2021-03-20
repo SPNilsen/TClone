@@ -106,6 +106,9 @@ class SwipeFragment : Fragment() {
 
         })
 
+        matchFrame.setOnItemClickListener{ position, data -> //do nothing
+        }
+
         likeButton.setOnClickListener{
             if(!rowItems.isEmpty()){
                 matchFrame.topCardListener.selectRight()

@@ -26,11 +26,11 @@
             android:scaleType="fitCenter"
             />
         <LinearLayout
-            android:id="@+id/profileClickLayout"
+            android:id="@+id/userInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_name_height"
             android:orientation="horizontal"
-            android:background="#AAAAAAAA"
+
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:layout_gravity="bottom"
@@ -39,10 +39,11 @@
             <TextView
                 android:id="@+id/nameTV"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="27sp"
                 android:textStyle="bold"
+                android:background="#AAAAAAAA"
                 android:gravity="bottom|left"
                 android:text="HELLO"
                 />
