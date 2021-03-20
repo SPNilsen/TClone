@@ -21,6 +21,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:scaleType="centerInside"
+            android:background="@null"
             android:src="@drawable/dislike" />
 
         <ImageButton
@@ -30,6 +31,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:scaleType="centerInside"
+            android:background="@null"
             android:src="@drawable/like" />
     </LinearLayout>
 
