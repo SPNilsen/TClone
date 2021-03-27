@@ -15,4 +15,5 @@
     <string name="hint_preferred_gender">Looking for a</string>
     <string name="text_signout">Signout</string>
     <string name="text_apply">Apply</string>
+    <string name="match_text">Match!</string>
 </resources>

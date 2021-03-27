@@ -1,12 +1,14 @@
 package com.example.tclone.fragments
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.tclone.R
 import com.example.tclone.activities.TinderCallback
 import com.example.tclone.adapters.CardsAdapter
@@ -15,8 +17,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import com.ib.custom.toast.CustomToastView
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
 import kotlinx.android.synthetic.main.fragment_swipe.*
+import com.ib.custom.toast.CustomToastView as CustomToast
 
 class SwipeFragment : Fragment() {
 
@@ -83,9 +87,14 @@ class SwipeFragment : Fragment() {
                             override fun onCancelled(error: DatabaseError){
                             }
 
-                            override fun onDataChange(p0: DataSnapshot) {
-                                if(p0.hasChild(selectedUserId)){
-                                    Toast.makeText(context, "Match!", Toast.LENGTH_SHORT).show()
+                            override fun onDataChange(snapshot: DataSnapshot) {
+
+                                if(snapshot.hasChild(selectedUserId)){
+//                                    Toast.makeText(context, "Match!", Toast.LENGTH_SHORT).show()
+//                                    Toast.makeText(getActivity()!!.getApplicationContext(), "Match!", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@SwipeFragment.requireActivity(), getString(R.string.match_text), Toast.LENGTH_SHORT).show()
+                                    CustomToast.makeText(this@SwipeFragment.requireActivity(), Toast.LENGTH_SHORT,CustomToast.DEFAULT, R.string.match_text.toString(),false).show();
+                                    Log.i("alert","It's a match!")
 
                                     userDatabase.child(userId).child(DATA_SWIPES_RIGHT).child(selectedUserId).removeValue()
                                     userDatabase.child(userId).child(DATA_MATCHES).child(selectedUserId).setValue(true)
